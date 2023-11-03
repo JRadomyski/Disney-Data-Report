@@ -12,12 +12,12 @@ countries_reach = df.groupby('country')['reach'].sum().sort_values(ascending=Fal
 print(countries_reach)
 
 print("task#3")
-df['Efficiency_Ratio'] = df['reach'] / df['host_traffic']
-efficiency_by_source = df.groupby('host')['Efficiency_Ratio'].mean().sort_values(ascending=False).head(3)
+df = df[df['host_traffic'] > 0]
+efficiency_by_source = (df['reach'] / df['host_traffic']).groupby(df['host']).mean().sort_values(ascending=False).head(3)
 print(efficiency_by_source)
 
-print("task#4")
 
+print("task#4")
 df['created_date'] = pd.to_datetime(df['created_date'], errors='coerce')
 
 sentiment_mapping = {
